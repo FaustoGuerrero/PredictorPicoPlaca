@@ -18,7 +18,9 @@ public class PantallaPrincipal {
         String fecha = scanner.nextLine();
         System.out.println("Ingrese la hora en formato \"HH:mm\" (24 horas). Ejemplo: 23:59");
         String hora = scanner.nextLine();
-        Vehiculo vehículo = new Vehiculo(placa);
+        Vehiculo vehiculo = new Vehiculo(placa);
         HorarioCirculacionVehiculos horario = new HorarioCirculacionVehiculos(fecha, hora);
+        //ValidadorPlaca validadorPlaca = new ValidadorPlaca(placa);
+                
     }
 }

@@ -18,7 +18,7 @@ public class HorarioCirculacionVehiculos {
     public HorarioCirculacionVehiculos(String fecha, String hora) {
         this.fecha = fecha;
         this.hora = hora;       
-        obtenerDiaSemana(this.fecha);
+        this.diaSemana = obtenerDiaSemana(this.fecha);
     }
 
     public String getFecha() {
@@ -45,17 +45,18 @@ public class HorarioCirculacionVehiculos {
         this.diaSemana = diaSemana;
     }
 
-    private void obtenerDiaSemana(String fecha) {
+    private String obtenerDiaSemana(String fecha) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date fechaParseada = formatoFecha.parse(fecha);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(fechaParseada);
             String diaXSemana = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale("es", "ES"));
-            this.setDiaSemana(diaXSemana.toUpperCase());
+            return diaXSemana.toUpperCase();
         } catch (ParseException e) {
             System.out.println("Error al parsear la fecha " + e.getMessage());
-        }
+            return "";
+        }        
     }
     
 }

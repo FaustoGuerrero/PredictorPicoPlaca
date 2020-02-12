@@ -1,6 +1,7 @@
 package com.stackbuilders.vista;
 
 import com.stackbuilders.modelo.HorarioCirculacionVehiculos;
+import com.stackbuilders.modelo.PredictorPicoPlaca;
 import com.stackbuilders.modelo.Vehiculo;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class PantallaPrincipal {
         String hora = scanner.nextLine();
         Vehiculo vehiculo = new Vehiculo(placa);
         HorarioCirculacionVehiculos horario = new HorarioCirculacionVehiculos(fecha, hora);
-        //ValidadorPlaca validadorPlaca = new ValidadorPlaca(placa);
-                
+        PredictorPicoPlaca predictorPicoPlaca = new PredictorPicoPlaca(vehiculo, horario);
+        
     }
 }

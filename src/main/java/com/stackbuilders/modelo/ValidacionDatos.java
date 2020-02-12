@@ -10,40 +10,30 @@ import java.util.regex.Pattern;
 public class ValidacionDatos {
     public static String mensajeError= "";    
     
-    public boolean validarPlaca(Vehiculo vehiculo) {
-        String patronPlaca = "^[A-Z]{4}-[0-9]{3}";
-        Pattern patron = Pattern.compile(patronPlaca);
+    public boolean validarPlaca(Vehiculo vehiculo) {        
+        Pattern patron = Pattern.compile(Constantes.PATRON_PLACA);
         Matcher comparador = patron.matcher(vehiculo.getPlaca());
-        if (comparador.find()) {
-            return true;
-        } else {
-            mensajeError += "Placa incorrecta \n";
-            return false;
-        }
+        return compararPatronDato(comparador);
     }
-    
-    public boolean validarFecha(HorarioCirculacionVehiculos horarioFecha) {
-        String patronFecha = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
-        Pattern patron = Pattern.compile(patronFecha);
+        
+    public boolean validarFecha(HorarioCirculacionVehiculos horarioFecha) {        
+        Pattern patron = Pattern.compile(Constantes.PATRON_FECHA);
         Matcher comparador = patron.matcher(horarioFecha.getFecha());
-        if (comparador.find()) {
-            return true;
-        } else {
-            mensajeError += "Fecha o formato incorrecto. \n";
-            return false;
-        }
+        return compararPatronDato(comparador);
     }
 
-    public boolean validarHora(HorarioCirculacionVehiculos horarioHora) {
-        String patronFecha = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
-        Pattern patron = Pattern.compile(patronFecha);
+    public boolean validarHora(HorarioCirculacionVehiculos horarioHora) {        
+        Pattern patron = Pattern.compile(Constantes.PATRON_HORA);
         Matcher comparador = patron.matcher(horarioHora.getHora());
+        return compararPatronDato(comparador);
+    }
+    
+    private boolean compararPatronDato(Matcher comparador){
         if (comparador.find()) {
             return true;
         } else {
-            mensajeError += "Hora/minutos o formato incorrecto.\n";
+            mensajeError += "Se encontraron errores. Revise por favor los datos ingresados \n";
             return false;
         }
     }
-    
 }

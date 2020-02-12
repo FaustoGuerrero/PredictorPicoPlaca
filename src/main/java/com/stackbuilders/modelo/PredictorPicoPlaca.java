@@ -7,28 +7,22 @@ import java.time.LocalTime;
  * @author fausto
  */
 public class PredictorPicoPlaca {
-    String mensajeError= "";
+
+    String mensajeError = "";
     Vehiculo vehiculo;
     HorarioCirculacionVehiculos horario;
     ValidacionDatos validacionDatos;
 
-    public PredictorPicoPlaca() {                
+    public PredictorPicoPlaca() {
         if (validacionDatos.validarPlaca(vehiculo) && validacionDatos.validarFecha(horario) && validacionDatos.validarHora(horario)) {
             verificarPicoPlaca(vehiculo, horario);
         } else {
             System.out.println(mensajeError);
         }
-    }    
+    }
 
     private void verificarPicoPlaca(Vehiculo vehiculo, HorarioCirculacionVehiculos horarioCirculacionVehiculos) {
-        //HORARIOS DE PICO Y PLACA
-        LocalTime start1 = LocalTime.parse("06:59");
-        LocalTime stop1 = LocalTime.parse("09:31");
-        LocalTime start2 = LocalTime.parse("15:59");
-        LocalTime stop2 = LocalTime.parse("19:31");
-        //Hora que transita el vehiculo
-        LocalTime horaVehiculo = LocalTime.parse(horarioCirculacionVehiculos.getHora());
-
+        LocalTime horaTransitaVehiculo = LocalTime.parse(horarioCirculacionVehiculos.getHora());
         char ultimoDigitoPlaca = vehiculo.getPlaca().charAt(7);
         String diaSemana = horarioCirculacionVehiculos.getDiaSemana();
         String digitosProhibidos = "";
@@ -44,13 +38,13 @@ public class PredictorPicoPlaca {
             }
             System.out.println("Digitos prohibidos en este dia " + horarioCirculacionVehiculos.getDiaSemana().toLowerCase() + " son: " + digitosProhibidos);
             if (digitosProhibidos.contains(Character.toString(ultimoDigitoPlaca))
-                    && horaVehiculo.isAfter(start1) && horaVehiculo.isBefore(stop1)
-                    || horaVehiculo.isAfter(start2) && horaVehiculo.isBefore(stop2)) {
+                    && horaTransitaVehiculo.isAfter(Constantes.HORARIO_MATUTINO_INICIAL) && horaTransitaVehiculo.isBefore(Constantes.HORARIO_MATUTINO_FINAL)
+                    || horaTransitaVehiculo.isAfter(Constantes.HORARIO_VESPERTINO_INICIAL) && horaTransitaVehiculo.isBefore(Constantes.HORARIO_VESPERTINO_FINAL)) {
                 System.out.println("PROHIBIDO circular en este horario. Ud tiene Pico y Placa");
             } else {
                 System.out.println("Siga circulando con seguridad");
             }
         }
     }
-    
+
 }

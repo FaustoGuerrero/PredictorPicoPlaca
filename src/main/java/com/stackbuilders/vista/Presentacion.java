@@ -11,7 +11,7 @@ public class Presentacion {
     
     public static void presentarMenu() {
         System.out.println("\t*** MENU ***" + "\n");
-        System.out.println("Ingrese el numero de placa del vehiculo. Ejemplo: ABCD-123 ");
+        System.out.println("Ingrese el numero de placa del vehiculo. Ejemplo: ABC-1234 ");
         Scanner scanner = new Scanner(System.in);
         String placa = scanner.nextLine();
         System.out.println("Ingrese la fecha en formato \"dd/MM/yyyy\". Ejemplo: 10/01/2020 ");

@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class ValidacionDatos {
 
     public static String mensajeError = "";   
-    private boolean siDatosIngresadosCorrectos;
+    private final boolean siDatosIngresadosCorrectos;
     Vehiculo vehiculo;
     HorarioCirculacionVehiculos horarioCirculacionVehiculos;
     PredictorPicoPlaca predictorPicoPlaca;

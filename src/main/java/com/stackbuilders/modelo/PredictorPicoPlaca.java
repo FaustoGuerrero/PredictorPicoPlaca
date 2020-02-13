@@ -25,8 +25,8 @@ public class PredictorPicoPlaca {
             }
             System.out.println("Digitos prohibidos en este dia " + horarioCirculacionVehiculos.getDiaSemana().toLowerCase() + " son: " + digitosProhibidosCircular);
             if (digitosProhibidosCircular.contains(Character.toString(ultimoDigitoPlaca))
-                    && horaTransitaVehiculo.isAfter(Constantes.HORARIO_MATUTINO_INICIAL) && horaTransitaVehiculo.isBefore(Constantes.HORARIO_MATUTINO_FINAL)
-                    || horaTransitaVehiculo.isAfter(Constantes.HORARIO_VESPERTINO_INICIAL) && horaTransitaVehiculo.isBefore(Constantes.HORARIO_VESPERTINO_FINAL)) {
+                    && (horaTransitaVehiculo.isAfter(Constantes.HORARIO_MATUTINO_INICIAL) && horaTransitaVehiculo.isBefore(Constantes.HORARIO_MATUTINO_FINAL)
+                    || horaTransitaVehiculo.isAfter(Constantes.HORARIO_VESPERTINO_INICIAL) && horaTransitaVehiculo.isBefore(Constantes.HORARIO_VESPERTINO_FINAL))) {
                 System.out.println("PROHIBIDO circular en este horario. Ud tiene Pico y Placa");
             } else {
                 System.out.println("Siga circulando con seguridad");

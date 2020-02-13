@@ -11,7 +11,6 @@ import java.util.Locale;
  * @author fausto
  */
 public class HorarioCirculacionVehiculos {
-    public static HorarioCirculacionVehiculos instance; //singleton
     private String fecha;
     private String hora;
     private String diaSemana;
@@ -20,8 +19,7 @@ public class HorarioCirculacionVehiculos {
     public HorarioCirculacionVehiculos(String fecha, String hora) {
         this.fecha = fecha;
         this.hora = hora;       
-        this.diaSemana = obtenerDiaSemana(this.fecha);
-       // System.out.println("Fecha "+getFecha()+" Hora "+getHora()+" Dia de semana " +getDiaSemana());
+        this.diaSemana = obtenerDiaSemana(this.fecha);       
     }
 
     public String getFecha() {

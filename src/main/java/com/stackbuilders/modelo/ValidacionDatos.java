@@ -8,27 +8,44 @@ import java.util.regex.Pattern;
  * @author fausto
  */
 public class ValidacionDatos {
-    public static String mensajeError= "";    
-        
-    public static boolean validarPlaca(Vehiculo vehiculo) {        
-        Pattern patron = Pattern.compile(Constantes.PATRON_PLACA);
-        Matcher comparador = patron.matcher(vehiculo.getPlaca());
-        return compararPatronDato(comparador);
+
+    public static String mensajeError = "";   
+    private boolean siDatosIngresadosCorrectos;
+    Vehiculo vehiculo;
+    HorarioCirculacionVehiculos horarioCirculacionVehiculos;
+    PredictorPicoPlaca predictorPicoPlaca;
+    
+    public ValidacionDatos(String placa, String fecha, String hora) {
+      siDatosIngresadosCorrectos = validarPlaca(placa) && validarFecha(fecha) && validarHora(hora);
+      predictorPicoPlaca = new PredictorPicoPlaca();
+      if(siDatosIngresadosCorrectos){
+          vehiculo=new Vehiculo(placa);
+          horarioCirculacionVehiculos= new HorarioCirculacionVehiculos(fecha,hora);            
+          predictorPicoPlaca.verificarPicoPlaca(vehiculo, horarioCirculacionVehiculos);
+      }else{
+          System.out.println(mensajeError);
+      }
     }
-        
-    public static boolean validarFecha(HorarioCirculacionVehiculos horarioFecha) {        
-        Pattern patron = Pattern.compile(Constantes.PATRON_FECHA);
-        Matcher comparador = patron.matcher(horarioFecha.getFecha());
+
+    private boolean validarPlaca(String placa) {
+        Pattern patron = Pattern.compile(Constantes.PATRON_PLACA);
+        Matcher comparador = patron.matcher(placa);
         return compararPatronDato(comparador);
     }
 
-    public static boolean validarHora(HorarioCirculacionVehiculos horarioHora) {        
-        Pattern patron = Pattern.compile(Constantes.PATRON_HORA);
-        Matcher comparador = patron.matcher(horarioHora.getHora());
+    private boolean validarFecha(String fecha) {
+        Pattern patron = Pattern.compile(Constantes.PATRON_FECHA);
+        Matcher comparador = patron.matcher(fecha);
         return compararPatronDato(comparador);
     }
-    
-    private static boolean compararPatronDato(Matcher comparador){
+
+    private boolean validarHora(String hora) {
+        Pattern patron = Pattern.compile(Constantes.PATRON_HORA);
+        Matcher comparador = patron.matcher(hora);
+        return compararPatronDato(comparador);
+    }
+
+    private static boolean compararPatronDato(Matcher comparador) {
         if (comparador.find()) {
             return true;
         } else {
